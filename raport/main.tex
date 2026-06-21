@@ -20,8 +20,10 @@
 \maketitle
 
 \section{Wprowadzenie do błądzenia losowego}
-Błądzenie losowe (random walk) jest jednym z podstawowych przykładów łańcucha Markowa. Model opisuje proces poruszający się po zbiorze liczb całkowitych, który w każdym kroku wykonuje ruch o jednostkę w prawo lub w lewo z danym prawdopodobieństwem.\newline
-Przykładowe interpretacje to ruch pijanego człowieka po prostej albo kapitał gracza, który w każdej rozgrywce wygrywa lub przegrywa jednostkę.\newline
+Błądzenie losowe (random walk) jest jednym z podstawowych przykładów łańcucha Markowa. Model opisuje proces poruszający się po zbiorze liczb całkowitych, który w każdym kroku wykonuje ruch o jednostkę w prawo lub w lewo z danym prawdopodobieństwem.
+
+Przykładowe interpretacje to ruch pijanego człowieka po prostej albo kapitał gracza, który w każdej rozgrywce wygrywa lub przegrywa jednostkę.
+
 Proces ten stanowi klasyczny model wykorzystywany w teorii prawdopodobieństwa, statystyce, fizyce i finansach.
 
 \section{Definicja modelu}
@@ -73,25 +75,31 @@ Poszczególne ścieżki spaceru losowego przedstawia \autoref{fig:random_walk_pa
 \section{Komunikacja stanów i nierozkładalność}
 Jednym z podstawowych pojęć w teorii łańcuchów Markowa jest komunikacja stanów. Mówimy, że stan $j$ jest osiągalny ze stanu $i$, jeśli istnieje skończona liczba kroków $n$, taka że prawdopodobieństwo przejścia ze stanu $i$ do stanu $j$ w dokładnie $n$ krokach jest dodatnie, czyli
 $$P_{i,j}^{(n)}>0.$$
-Jeżeli stan $i$ jest osiągalny ze stanu $j$ oraz jednocześnie stan $j$ jest osiągalny ze stanu $i$, to mówimy, że stany komunikują się.\newline
+Jeżeli stan $i$ jest osiągalny ze stanu $j$ oraz jednocześnie stan $j$ jest osiągalny ze stanu $i$, to mówimy, że stany komunikują się.
+
 W analizowanym modelu komunikacja stanów wygląda następująco:
 \begin{itemize}
     \item jeśli $j>i$, wystarczy wykonać odpowiednią liczbę ruchów w prawo,
     \item jeśli $j<i$, wystarczy wykonać odpowiednią liczbę ruchów w lewo.
 \end{itemize}
-Ponieważ prawdopodobieństwa przejścia w obu kierunkach są dodatnie $(0<p<1)$, każda taka ścieżka ma dodatnie prawdopodobieństwo realizacji. Oznacza to, że każdy stan komunikuje się z każdym innym stanem. Łańcuch posiada zatem tylko jedną klasę komunikującą się i jest nierozkładalny.\newline
-Nierozkładalność jest bardzo istotną własnością, ponieważ pozwala klasyfikować cały łańcuch na podstawie pojedynczego stanu. W ogólnym przypadku różne stany łańcucha mogą mieć różny charakter: część może być rekurencyjna, a część przejściowa. Jednak dla łańuchów nierozkładalnych zachodzi następujące twierdzenie:\newline
+Ponieważ prawdopodobieństwa przejścia w obu kierunkach są dodatnie $(0<p<1)$, każda taka ścieżka ma dodatnie prawdopodobieństwo realizacji. Oznacza to, że każdy stan komunikuje się z każdym innym stanem. Łańcuch posiada zatem tylko jedną klasę komunikującą się i jest nierozkładalny.
+
+Nierozkładalność jest bardzo istotną własnością, ponieważ pozwala klasyfikować cały łańcuch na podstawie pojedynczego stanu. W ogólnym przypadku różne stany łańcucha mogą mieć różny charakter: część może być rekurencyjna, a część przejściowa. Jednak dla łańcuchów nierozkładalnych zachodzi następujące twierdzenie:\newline
 \textit{Wszystkie stany należące do tej samej klasy komunikującej się mają ten sam charakter. Oznacza to, że są albo wszystkie rekurencyjne, albo wszystkie przejściowe.}\newline
-Intuicyjnie wynika to z faktu, że skoro można przechodzić pomiędzy stanami w obie strony, to zachowanie procesu obserwowane w jednym stanie musi odzwierciedlać zachowanie całej klasy stanów. Gdyby jeden stan był rekurencyjny, a drugi przejściowy, prowadziłoby to do sprzeczności z możliwością wielokrotnego przemieszczania się między nimi. W konsekwencji do zbadania własności całego analizowanego błądzenia losowego wystarczy przeanalizować tylko jeden stan, najwygodniej stan początkowy $0$. Jeżeli stan $0$ okaże się rekurencyjny, to rekurencyjne będą wszystkie stany. Jeżeli natomiast stan $0$ będzie przejściowy, to przejściowy będzie cały łańuch.
+Intuicyjnie wynika to z faktu, że skoro można przechodzić pomiędzy stanami w obie strony, to zachowanie procesu obserwowane w jednym stanie musi odzwierciedlać zachowanie całej klasy stanów. Gdyby jeden stan był rekurencyjny, a drugi przejściowy, prowadziłoby to do sprzeczności z możliwością wielokrotnego przemieszczania się między nimi. W konsekwencji do zbadania własności całego analizowanego błądzenia losowego wystarczy przeanalizować tylko jeden stan, najwygodniej stan początkowy $0$. Jeżeli stan $0$ okaże się rekurencyjny, to rekurencyjne będą wszystkie stany. Jeżeli natomiast stan $0$ będzie przejściowy, to przejściowy będzie cały łańcuch.
 
 \section{Rekurencyjność i przejściowość stanów}
-Jednym z podstawowych problemów w teorii łańcuchów Markowa jest określenie, czy proces ma tendencję do powracania do wcześniej odwiedzonych stanów, czy też stopniowo oddala się od nich. W tym celu wprowadza się pojęcia rekurencyjności oraz przejściowości stanów. Interpretacja tych własności jest szczególnie naturalna w przypadku błądzenia losowego. Można bowiem zadać pytanie: jeżeli proces rozpoczyna się w punkcie 0, to czy z pewnością kiedyś do niego powróci, czy też istnieje możliwość, że będzie oddalał się coraz bardziej i nigdy już nie odwiedzi punktu startowego?\newline
+Jednym z podstawowych problemów w teorii łańcuchów Markowa jest określenie, czy proces ma tendencję do powracania do wcześniej odwiedzonych stanów, czy też stopniowo oddala się od nich.
+W tym celu wprowadza się pojęcia rekurencyjności oraz przejściowości stanów. Interpretacja tych własności jest szczególnie naturalna w przypadku błądzenia losowego.
+Można bowiem zadać pytanie: jeżeli proces rozpoczyna się w punkcie 0, to czy z pewnością kiedyś do niego powróci, czy też istnieje możliwość, że będzie oddalał się coraz bardziej i nigdy już nie odwiedzi punktu startowego?
+
 Zdefiniujmy zatem stan rekurencyjny:\newline
 \textit{Niech}
 $$T_i = \min\{n \geq 1: X_n=i\}$$
 \textit{oznacza czas pierwszego powrotu do stanu $i$. Stan $i$ nazywamy rekurencyjnym, jeżeli po jego opuszczeniu proces powróci do niego z prawdopodobieństwem równym $1$. Formalnie}
 $$P_i(T_i<\infty)=1.$$
-Oznacza to, że powrót do tego stanu jest pewny, chociaż nie wiadomo po jakim czasie on nastąpi. Czas oczekiwania na powrót może być bardzo długi, jednak prawdopodobieństwo, że powrót nastąpi, wynosi $1$.\newline
+Oznacza to, że powrót do tego stanu jest pewny, chociaż nie wiadomo po jakim czasie on nastąpi. Czas oczekiwania na powrót może być bardzo długi, jednak prawdopodobieństwo, że powrót nastąpi, wynosi $1$.
+
 Teraz skupmy się na zdefiniowaniu stanu przejściowego:\newline
 \textit{Stan $i$ nazywamy przejściowym, jeżeli prawdopodobieństwo powrotu do niego jest mniejsze od $1$, czyli}
 $$P_i(T_i<\infty)<1.$$
@@ -100,9 +108,11 @@ W takim przypadku istnieje dodatnie prawdopodobieństwo, że po opuszczeniu tego
     \item proces wróci do stanu $i$,
     \item proces oddali się od niego na zawsze.
 \end{itemize}
-Stan przejściowy nie jest więc odwiedzany nieskończenie wiele razy z prawdopodobieństwem $1$.\newline
-Po zapoznaniu się z definicjami stanów rekurencyjnego oraz przejściowego można pokusić się o krótką analizę intuicji w kontekście błądzenia losowego. Jeżeli błądzenie jest symetryczne $(p=\frac{1}{2})$, to ruch w lewo i w prawo jest jednakowo prawdopodobny. Nie występuje żaden preferowany kierunek ruchu, dlatego proces stale krąży wokół punktu początkowego. Można oczekiwać, że wcześniej czy później ponownie odwiedzi punkt startowy. Natomiast gdy $p\neq \frac{1}{2}$, pojawia się tendencja do poruszania się w jednym kierunku. Na przykład dla $p>\frac{1}{2}$ ruch w prawo jest bardziej prawdopodobny niż ruch w lewo. W rezultacie proces wykazuje średni dryf w prawo i może oddalić się od punktu początkowego tak bardzo, że już nigdy do niego nie wróci. To właśnie prowadzi do przejściowości stanu.\newline
-W teorii łańcuchów Markowa istnieje bardzo użyteczne kryterium pozwalające rozstrzygnąć, czy dany stan jest rekurencyjny czy przejściowy. Niech $P_{ii}^{(n)}$ oznacza prawdopodobieństwo przebywania w stanie $i$ po $n$ krokach przy założeniu , że proces rozpoczął się w stanie $i$. Wówczas:
+Stan przejściowy nie jest więc odwiedzany nieskończenie wiele razy z prawdopodobieństwem $1$.
+
+Po zapoznaniu się z definicjami stanów rekurencyjnego oraz przejściowego można pokusić się o krótką analizę intuicji w kontekście błądzenia losowego. Jeżeli błądzenie jest symetryczne $(p=\frac{1}{2})$, to ruch w lewo i w prawo jest jednakowo prawdopodobny. Nie występuje żaden preferowany kierunek ruchu, dlatego proces stale krąży wokół punktu początkowego. Można oczekiwać, że wcześniej czy później ponownie odwiedzi punkt startowy. Natomiast gdy $p\neq \frac{1}{2}$, pojawia się tendencja do poruszania się w jednym kierunku. Na przykład dla $p>\frac{1}{2}$ ruch w prawo jest bardziej prawdopodobny niż ruch w lewo. W rezultacie proces wykazuje średni dryf w prawo i może oddalić się od punktu początkowego tak bardzo, że już nigdy do niego nie wróci. To właśnie prowadzi do przejściowości stanu.
+
+W teorii łańcuchów Markowa istnieje bardzo użyteczne kryterium pozwalające rozstrzygnąć, czy dany stan jest rekurencyjny czy przejściowy. Niech $P_{ii}^{(n)}$ oznacza prawdopodobieństwo przebywania w stanie $i$ po $n$ krokach przy założeniu, że proces rozpoczął się w stanie $i$. Wówczas:
 \begin{itemize}
     \item stan $i$ jest rekurencyjny wtedy i tylko wtedy, gdy $\sum_{n=0}^{\infty}P_{ii}^{(n)}=\infty$,
     \item stan $i$ jest przejściowy wtedy i tylko wtedy, gdy $\sum_{n=0}^{\infty}P_{ii}^{(n)}<\infty$.
@@ -136,7 +146,8 @@ Ponieważ $4p(1-p) \leq 1$, a równość zachodzi wyłącznie dla $p=\frac{1}{2}
     \item Przypadek symetryczny ($p=\frac{1}{2}$)
     \item Przypadek niesymetryczny ($p \neq \frac{1}{2}$)
 \end{itemize}
-Dla przypadku symetrycznego uzyskujemy $P_{00}^{2n} \sim \frac{1}{\sqrt{\pi n}}$, a szereg $\sum \frac{1}{\sqrt{n}}$ jest rozbieżny. Zatem stan $0$ jest rekurencyjny, a więc cały łańcuch jest rekurencyjny. Dla przypadku niesymetrycznego mamy $4p(1-p)<1$, więc wyrazy maleją wykładniczo i szereg jest zbieżny. Otrzymujemy, że wszystkie stany są przejściowe.\newline
+Dla przypadku symetrycznego uzyskujemy $P_{00}^{2n} \sim \frac{1}{\sqrt{\pi n}}$, a szereg $\sum \frac{1}{\sqrt{n}}$ jest rozbieżny. Zatem stan $0$ jest rekurencyjny, a więc cały łańcuch jest rekurencyjny. Dla przypadku niesymetrycznego mamy $4p(1-p)<1$, więc wyrazy maleją wykładniczo i szereg jest zbieżny. Otrzymujemy, że wszystkie stany są przejściowe.
+
 W książce Rossa \cite{ross2007introduction} wyprowadzono również wzór na prawdopodobieństwo powrotu do punktu startowego:
 $$P(\text{powrót do 0}) = 2\min(p,1-p).$$
 W szczególności:
@@ -146,7 +157,7 @@ W szczególności:
 \end{itemize}
 
 Powyższe wyniki ilustruje \autoref{fig:ret_probs}.
-Przedstawiono na nim jak sumy częściowe $\sum_n P^n_{00}$ zależą od $n$ dla różnych wartości $p$ oraz prawdopodobieństwo powrotu do zera w zależności od $p$.
+Przedstawiono na nim, jak sumy częściowe $\sum_n P^n_{00}$ zależą od $n$ dla różnych wartości $p$ oraz prawdopodobieństwo powrotu do zera w zależności od $p$.
 \begin{figure}[htbp]
     \centering
     % Top Row
@@ -179,7 +190,7 @@ Ponieważ $\sum_{n=1}^{\infty}\frac{1}{n}$ jest szeregiem rozbieżnym, otrzymuje
 
 \section{Równanie przewodnictwa cieplnego}
 Interesujące zastosowanie spaceru losowego przedstawione jest w \cite{LawlerRandomWalk}.
-Wzorując się na opracowaniu Lawlere'a pokażemy, jak za pomocą symulacji otrzymać przybliżone rozwiązania równania przewodnictwa cieplnego.
+Wzorując się na opracowaniu Lawlera pokażemy, jak za pomocą symulacji otrzymać przybliżone rozwiązania równania przewodnictwa cieplnego.
 
 Niech $p_n(x)$ oznacza średnią gęstość ,,cząsteczek ciepła'' w punkcie $x$ w chwili $n$.
 Cząstki przemieszczają się losowo i w zależności od wymiaru przestrzeni $d$ w każdym kroku cząstka może się przemieścić w jednym z $d$ kierunków.
@@ -260,16 +271,16 @@ Wówczas
     = \sum_{j=1}^{N-1} c_j \langle \phi_i, \phi_j \rangle
     = \frac{N}{2} c_i.
 \end{equation*}
-Z definicji $f$ po lewej stronie powyższego mamy $f(x_0)\phi_i(x_0) = phi_i(x_0)$, a stąd
+Z definicji $f$ po lewej stronie powyższego mamy $f(x_0)\phi_i(x_0) = \phi_i(x_0)$, a stąd
 \begin{equation*}
     c_i = \frac{2}{N}\phi_i(x_0)
-    =\frac{2}{N} \sin\left( \frac{\pi i x}{N} \right).
+    =\frac{2}{N} \sin\left( \frac{\pi i x_0}{N} \right).
 \end{equation*}
 Zatem analityczne rozwiązanie (\ref{eq:heat-eq}) w tym przypadku to
 \begin{equation*}
-    p_n(x) = \frac{2}{N} \sum_{j=1}^{N-1} \sin\left( \frac{\pi j x}{N} \right) \cos\left( \frac{j\pi}{N} \right)^n \sin\left( \frac{\pi j x}{N} \right).
+    p_n(x) = \frac{2}{N} \sum_{j=1}^{N-1} \sin\left( \frac{\pi j x_0}{N} \right) \cos\left( \frac{j\pi}{N} \right)^n \sin\left( \frac{\pi j x}{N} \right).
 \end{equation*}
-Porównanie rozwiązanie analitycznego z symulacją dla różnych korków czasowych zilustrowane jest na \autoref{fig:heat-1d-single-source}.
+Porównanie rozwiązanie analitycznego z symulacją dla różnych kroków czasowych zilustrowane jest na \autoref{fig:heat-1d-single-source}.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\linewidth]{heat_1d_single_source.pdf}
@@ -285,7 +296,7 @@ Korzystając z analogicznych metod można pokazać, że w przypadku dwuwymiarowy
     \lambda_\mathbf{k} = \frac{1}{2} \left[ \cos\left( \frac{k_1 \pi}{N_1} \right) + \cos\left( \frac{k_2 \pi}{N_2} \right) \right],
 \end{equation*}
 \begin{equation*}
-    \phi_\mathbf{k}(x_1, x_2) = \sin\left( \frac{k_1 \pi x_1}{N_1} \right) \sin\left( \frac{k_2 \pi x}{N_2}\right),
+    \phi_\mathbf{k}(x_1, x_2) = \sin\left( \frac{k_1 \pi x_1}{N_1} \right) \sin\left( \frac{k_2 \pi x_2}{N_2}\right),
 \end{equation*}
 a rozwiązaniem (\ref{eq:heat-eq}) jest
 \begin{equation*}
