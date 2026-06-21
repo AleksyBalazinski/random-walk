@@ -1,0 +1,51 @@
+name: Compile LaTeX and Deploy to Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: raport/main.tex
+          working_directory: raport
+          compiler: pdflatex 
+
+      - name: Move PDF to deployment directory
+        run: |
+          mkdir public
+          # The compiled PDF will be inside the 'raport' folder
+          mv raport/main.pdf public/index.pdf 
+
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'public/'
+
+  deploy_pages:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}index.pdf
+    runs-on: ubuntu-latest
+    needs: build_latex
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
