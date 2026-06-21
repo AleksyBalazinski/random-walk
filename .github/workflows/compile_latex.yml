@@ -45,6 +45,7 @@ jobs:
           root_file: main.tex
           working_directory: raport
           compiler: pdflatex 
+          args: "-pdf -bibtex -interaction=nonstopmode -file-line-error"
 
       - name: Move PDF to deployment directory
         run: |
