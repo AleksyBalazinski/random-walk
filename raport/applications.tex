@@ -1,4 +1,4 @@
-\section{Zastosowania spaceru losowego}
+\section{Zastosowania spaceru losowego}\label{sec:applications}
 
 Pomimo prostej definicji bładzenia losowego jest ono jednym z ważniejszych typów łańcuchów Markowa. Jego popularność wynika z faktu, iż wiele zjawisk można opisać jako ciąg losowych zmian zachodzących w czasie. Poniżej omawiamy kilka przykładów zastosowania błądzenia losowego.
 
@@ -41,6 +41,13 @@ P_i=
 \frac{(\frac{q}{p})^i -(\frac{q}{p})^N}{1-(\frac{q}{p})^N},& p\neq q.
 \end{cases}
 $$
+Porównanie powyższych wyników analitycznych z symulacją przedstawia \autoref{fig:gamblers-ruin}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{gamblers_ruin.pdf}
+    \caption{Prawdopodobieństwo ruiny gracza w zależności od kapitału początkowego z $N=50$.}
+    \label{fig:gamblers-ruin}
+\end{figure}
 
 Model ruiny gracza znajduje zastosowanie w teorii ryzyka, matematyce aktuarialnej oraz analizie wypłacalności przedsiębiorstw i instytucji finansowych.
 
