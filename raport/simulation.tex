@@ -16,9 +16,9 @@ Granicę tego obszaru oznaczamy jako $\partial A = \{z \in \mathbf{Z}^d \setminu
 Definiujemy również dwa operatory liniowe $\mathcal{Q}$ i $\mathcal{L}$ jako
 \begin{equation*}
     \mathcal{Q} F(x) = \frac{1}{2d} \sum_{\lVert y - x \rVert = 1} F(y),
-\end{equation*}  
+\end{equation*}
 \begin{equation*}
-    \mathcal{L}F(x) = \frac{1}{2d} \sum_{\lVert y - x \rVert = 1} (F(x) - F(y))
+    \mathcal{L}F(x) = \frac{1}{2d} \sum_{\lVert y - x \rVert = 1} (F(y) - F(x))
     = (\mathcal{Q}-I)F(x).
 \end{equation*}
 Zauważmy, że każda funkcja $F: A \to \mathbf{R}$ może być rozumiana jako wektor w $\mathbf{R}^{|A|}$, zatem $\mathcal{Q}$ i $\mathcal{L}$ możemy traktować jak macierze $|A| \times |A|$.
@@ -46,7 +46,7 @@ Zauważmy, że
     = \frac{1}{2} ( \sin\theta(x-1) + \sin\theta(x+1))
     = \cos\theta \sin\theta x.
 \end{equation*}
-Jeśli weźmiemy $\theta_j = \pi j x/N$ to dostaniemy wektory i wartości własne $\mathcal{Q}$ równe odpowiednio
+Jeśli weźmiemy $\theta_j = \pi j/N$ to dostaniemy wektory i wartości własne $\mathcal{Q}$ równe odpowiednio
 \begin{equation*}
     \phi_j(x) = \sin\left( \frac{\pi j x}{N} \right), \; \lambda_j = \cos\left( \frac{\pi j}{N} \right),
 \end{equation*}

@@ -27,7 +27,7 @@ Jeżeli gracz gra sam to prawdopodobieństwo bankructwa wynosi:
 $$P_i = 
 \begin{cases} 
 1,& q \geq \frac{1}{2}\\
-\frac{q}{1-q},& q < \frac{1}{2}
+\left(\frac{q}{1-q}\right)^i ,& q < \frac{1}{2}
 \end{cases}
 $$
 
@@ -53,7 +53,7 @@ W podstawowym modelu dyskretnym, położenie organizmu po $n$ krokach, oznaczane
 
 
 W klasycznym wariancie zakłada się, że średnie przesunięcie kwadratowe (MSD) rośnie liniowo z czasem trwania ruchu:
-$[X_n^2]=2dDn$
+$E[X_n^2]=2dDn$
 
 gdzie $d$ to wymiar rozpatrywanej przestrzeni (np. $d=2$ dla organizmów poruszających się po przestrzeni dwuwymiarowej), a $D$ to współczynnik dyfuzji charakterystyczny dla danego gatunku i środowiska.
 
@@ -64,7 +64,7 @@ Loty Lévy'ego (\textit{Lévy flight}) są szczególnym rodzajem spaceru losoweg
 W klasycznym spacerze losowym lub ruchu Browna długości kolejnych kroków są zwykle podobnej wielkości. W rezultacie trajektoria procesu wygląda zazwyczaj jak ciąg drobnych ruchów wykonywanych wokół punktu początkowego. Natomiast dla lotu Lévy'ego sytuacja wygląda inaczej. Przez długi czas obiekt wykonuje niewielkie ruchy lokalne, po czym może nagle wykonać bardzo duży skok. Następnie ponownie porusza się lokalnie. W rezultacie trajektoria składa się z wielu krótkich odcinków przeplatanych sporadycznymi, lecz bardzo dużymi przemieszczeniami.
 
 
-Długości kroków w lotach Lévy'ego nie pochodzą z rozkładów o grubych ogonach. Oznacza to, że prawdopodobieństwo wystąpienia bardzo dużego kroku maleje znacznie wolniej niż w przypadku rozkładu normalnego.
+Długości kroków w lotach Lévy'ego pochodzą z rozkładów o grubych ogonach. Oznacza to, że prawdopodobieństwo wystąpienia bardzo dużego kroku maleje znacznie wolniej niż w przypadku rozkładu normalnego.
 
 Typowo zakłada się zależność
 
