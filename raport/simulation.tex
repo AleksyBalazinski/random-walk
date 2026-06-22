@@ -33,6 +33,7 @@ Zakładamy, że temperatura na brzegu obszaru jest równa zero, tj. $p_n(x) = 0$
 Odpowiada to sytuacji, w której cząsteczki są eliminowane podczas opuszczania obszaru $A$.
 W chwili początkowej rozkład temperatury jest dany: $p_0(x) = f(x)$.
 
+\subsection{Przypadek jednowymiarowy}
 Na początek załóżmy, że $d=1$ i $A = \{1, \dots, N-1\}$.
 Równanie (\ref{eq:heat-eq}) rozwiązujemy metodą rozdzielenia zmiennych, tj. zakładamy, że rozwiązanie ma postać iloczynu $p_n(x) = \lambda^n \phi(x)$.
 Wówczas $\partial_n p_n(x) = (\lambda - 1)p_n(x)$ i z (\ref{eq:heat-eq}) dostajemy
@@ -101,6 +102,7 @@ Symulację wykonano z użyciem 10000 cząstek.
 Jak możemy zobaczyć na rysunku, wyniki uzyskane metodą symulacji są bardzo dobrym przybliżeniem rozwiązania analitycznego.
 Możemy również zaobserwować, że ze względu na zerową temperaturę na brzegu obszaru $A$, układ stopniowo wygasa (temperatura na $A$ zmniejsza się) przy czym przyjmuje ona największe wartości na środku obszaru.
 
+\subsection{Przypadek dwuwymiarowy}
 Korzystając z analogicznych metod można pokazać, że w przypadku dwuwymiarowym
 \begin{equation*}
     \lambda_\mathbf{k} = \frac{1}{2} \left[ \cos\left( \frac{k_1 \pi}{N_1} \right) + \cos\left( \frac{k_2 \pi}{N_2} \right) \right],

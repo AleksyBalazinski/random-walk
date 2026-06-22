@@ -10,3 +10,4 @@ raport/*.synctex.gz
 raport/*.bbl
 raport/*.out
 raport/*.blg
+raport/*.toc
