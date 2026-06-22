@@ -1,0 +1,169 @@
+\section{Zastosowanie symulacji: równanie przewodnictwa cieplnego}
+Interesujące zastosowanie spaceru losowego przedstawione jest w \cite{LawlerRandomWalk}.
+Wzorując się na opracowaniu Lawlera pokażemy, jak za pomocą symulacji otrzymać przybliżone rozwiązania równania przewodnictwa cieplnego.
+
+Niech $p_n(x)$ oznacza średnią gęstość ,,cząsteczek ciepła'' w punkcie $x$ w chwili $n$.
+Cząstki przemieszczają się losowo i w zależności od wymiaru przestrzeni $d$ w każdym kroku cząstka może się przemieścić w jednym z $d$ kierunków.
+Na przykład, jeśli $d = 2$, z prawdopodobieństwem $1/4$ cząstka może przemieścić się w prawo, lewo, górę lub w dół.
+Dodatkowo zakładamy, że cząstki są od siebie niezależne.
+Rozważmy jak zmienia się gęstość w punkcie $x$.
+Przy naszych założeniach, średnio $1/(2d)$ cząstek znajdujących się w każdym z sąsiadujących punktów $y$ przemieści się do $x$, a zatem mamy
+\begin{equation}\label{eq:density-update-full}
+    p_{n+1}(x) = \frac{1}{2d} \sum_{\lVert y-x\rVert=1} p_n(y).
+\end{equation}
+Skończony obszar, na którym mogą przemieszczać się cząstki oznaczamy przez $A \subset \mathbf{Z}^d$.
+Granicę tego obszaru oznaczamy jako $\partial A = \{z \in \mathbf{Z}^d \setminus A :  \textrm{dist}(z, A) = 1\}$.
+Definiujemy również dwa operatory liniowe $\mathcal{Q}$ i $\mathcal{L}$ jako
+\begin{equation*}
+    \mathcal{Q} F(x) = \frac{1}{2d} \sum_{\lVert y - x \rVert = 1} F(y),
+\end{equation*}  
+\begin{equation*}
+    \mathcal{L}F(x) = \frac{1}{2d} \sum_{\lVert y - x \rVert = 1} (F(x) - F(y))
+    = (\mathcal{Q}-I)F(x).
+\end{equation*}
+Zauważmy, że każda funkcja $F: A \to \mathbf{R}$ może być rozumiana jako wektor w $\mathbf{R}^{|A|}$, zatem $\mathcal{Q}$ i $\mathcal{L}$ możemy traktować jak macierze $|A| \times |A|$.
+Wówczas (\ref{eq:density-update-full}) możemy zapisać jako
+\begin{equation}\label{eq:heat-eq}
+    \partial_n p_n(x) = \mathcal{L}p_n(x), \; x \in A, 
+\end{equation}
+gdzie $\partial_n p_n(x) = p_{n+1}(x) - p_n(x)$.
+Równanie (\ref{eq:heat-eq}) jest dyskretną wersją równania przewodnictwa cieplnego, gdzie $\mathcal{L}$ jest dyskretnym operatorem Laplace'a.
+
+Zakładamy, że temperatura na brzegu obszaru jest równa zero, tj. $p_n(x) = 0$ dla $x \in \partial A$.
+Odpowiada to sytuacji, w której cząsteczki są eliminowane podczas opuszczania obszaru $A$.
+W chwili początkowej rozkład temperatury jest dany: $p_0(x) = f(x)$.
+
+Na początek załóżmy, że $d=1$ i $A = \{1, \dots, N-1\}$.
+Równanie (\ref{eq:heat-eq}) rozwiązujemy metodą rozdzielenia zmiennych, tj. zakładamy, że rozwiązanie ma postać iloczynu $p_n(x) = \lambda^n \phi(x)$.
+Wówczas $\partial_n p_n(x) = (\lambda - 1)p_n(x)$ i z (\ref{eq:heat-eq}) dostajemy
+\begin{equation*}
+    (\lambda - 1)\lambda^n \phi(x) = \lambda^n (\mathcal{Q} - I) \phi(x) \rightarrow \mathcal{Q}\phi(x) = \lambda \phi(x).
+\end{equation*}
+Zatem szukamy wartości i wektorów własnych $\mathcal{Q}$, przy czym wymagamy $\phi = 0$ na $\partial A = \{0, N\}$.
+Zauważmy, że 
+\begin{equation*}
+    \mathcal{Q} \sin(\theta x)
+    = \frac{1}{2} ( \sin\theta(x-1) + \sin\theta(x+1))
+    = \cos\theta \sin\theta x.
+\end{equation*}
+Jeśli weźmiemy $\theta_j = \pi j x/N$ to dostaniemy wektory i wartości własne $\mathcal{Q}$ równe odpowiednio
+\begin{equation*}
+    \phi_j(x) = \sin\left( \frac{\pi j x}{N} \right), \; \lambda_j = \cos\left( \frac{\pi j}{N} \right),
+\end{equation*}
+dla których to $\phi_j$ jest spełniony warunek $\phi_j(0) = \phi_j(N) = 0$.
+Dodatkowo $\{\phi_j\}$ są ortogonalne, bowiem
+\begin{equation*}
+    \langle \phi_i, \phi_j \rangle = \sum_{x=1}^{N-1} \sin\left( \frac{\pi i x}{N} \right) \sin\left( \frac{\pi j x}{N} \right)
+    = \frac{N}{2} \delta_{ij}.
+\end{equation*}
+Zatem każdą funkcję $f$ na $A$ możemy zapisać jednoznacznie w postaci
+\begin{equation*}
+    f(x) = \sum_{j=1}^{N-1} c_j \phi_j(x).
+\end{equation*}
+Tak więc wystarczy, że znajdziemy $c_j$ takie, że $p_0(x) = f(x) = \sum_j c_j \phi_j(x)$.
+Wówczas rozwiązaniem (\ref{eq:heat-eq}) przy określonych warunkach początkowych będzie
+\begin{equation*}
+    p_n(x) = \sum_{j=1}^{N-1}c_j \lambda_j^n \phi_j(x).
+\end{equation*}
+
+Jako prosty przykład weźmy
+\begin{equation*}
+    f(x) =
+    \delta_{x_0}(x) \equiv
+    \begin{cases}
+        1 & \text{jeśli } x = x_0 \\ 
+        0 & \text{w p.p. } 
+    \end{cases}.
+\end{equation*}
+Wówczas 
+\begin{equation*}
+    \sum_{x=1}^{N-1} f(x)\phi_i(x) = \sum_{x=1}^{N-1} \sum_{j=1}^{N-1} c_j \phi_j(x) \phi_i(x)
+    = \sum_{j=1}^{N-1} c_j \langle \phi_i, \phi_j \rangle
+    = \frac{N}{2} c_i.
+\end{equation*}
+Z definicji $f$ po lewej stronie powyższego mamy $f(x_0)\phi_i(x_0) = \phi_i(x_0)$, a stąd
+\begin{equation*}
+    c_i = \frac{2}{N}\phi_i(x_0)
+    =\frac{2}{N} \sin\left( \frac{\pi i x_0}{N} \right).
+\end{equation*}
+Zatem analityczne rozwiązanie (\ref{eq:heat-eq}) w tym przypadku to
+\begin{equation*}
+    p_n(x) = \frac{2}{N} \sum_{j=1}^{N-1} \sin\left( \frac{\pi j x_0}{N} \right) \cos\left( \frac{j\pi}{N} \right)^n \sin\left( \frac{\pi j x}{N} \right).
+\end{equation*}
+Porównanie rozwiązanie analitycznego z symulacją dla różnych kroków czasowych zilustrowane jest na \autoref{fig:heat-1d-single-source}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{heat_1d_single_source.pdf}
+    \caption{Ewolucja układu z jednym źródłem.}
+    \label{fig:heat-1d-single-source}
+\end{figure}
+Symulację wykonano z użyciem 10000 cząstek.
+Jak możemy zobaczyć na rysunku, wyniki uzyskane metodą symulacji są bardzo dobrym przybliżeniem rozwiązania analitycznego.
+Możemy również zaobserwować, że ze względu na zerową temperaturę na brzegu obszaru $A$, układ stopniowo wygasa (temperatura na $A$ zmniejsza się) przy czym przyjmuje ona największe wartości na środku obszaru.
+
+Korzystając z analogicznych metod można pokazać, że w przypadku dwuwymiarowym
+\begin{equation*}
+    \lambda_\mathbf{k} = \frac{1}{2} \left[ \cos\left( \frac{k_1 \pi}{N_1} \right) + \cos\left( \frac{k_2 \pi}{N_2} \right) \right],
+\end{equation*}
+\begin{equation*}
+    \phi_\mathbf{k}(x_1, x_2) = \sin\left( \frac{k_1 \pi x_1}{N_1} \right) \sin\left( \frac{k_2 \pi x_2}{N_2}\right),
+\end{equation*}
+a rozwiązaniem (\ref{eq:heat-eq}) jest
+\begin{equation*}
+    p_n(x_1, x_2) = \sum_{k_1=1}^{N_1-1} \sum_{k_2=1}^{N_2-1} c_\mathbf{k} \lambda_\mathbf{k}^n \phi_\mathbf{k}(x_1, x_2),
+\end{equation*}
+gdzie
+\begin{equation*}
+    c_\mathbf{k} = \frac{4}{N_1 N_2} \sum_{x_1=1}^{N_1-1} \sum_{x_2=1}^{N_2-1} f(x_1, x_2) \phi_\mathbf{k}(x_1, x_2).
+\end{equation*}
+
+Rozważmy najprostszy przykład, gdzie $f(x) = \delta_{\mathbf{x}_0}(x)$.
+Wówczas
+\begin{equation*}
+    c_\mathbf{k} = \frac{4}{N_1 N_2} \phi_\mathbf{k}(\mathbf{x}_0).
+\end{equation*}
+Porównanie rozwiązania analitycznego z symulacją przestawione jest na \autoref{fig:heat_2d_single_source}.
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.9\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{heat_2d_single_source_0.pdf}
+        \caption{$n = 0$}
+        \label{fig:heat_2d_single_source_0}
+    \end{subfigure}
+    
+    \vspace{0.5cm} % Adds vertical spacing between rows
+
+    \begin{subfigure}[b]{0.9\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{heat_2d_single_source_5.pdf}
+        \caption{$n = 5$}
+        \label{fig:heat_2d_single_source_5}
+    \end{subfigure}
+    
+    \vspace{0.5cm} % Adds vertical spacing between rows
+
+    % --- Row 2 ---
+    \begin{subfigure}[b]{0.9\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{heat_2d_single_source_50.pdf}
+        \caption{$n = 50$}
+        \label{fig:heat_2d_single_source_50}
+    \end{subfigure}
+    
+
+    % Main Figure Caption
+    \caption{Ewolucja układu w dwu wymiarach. Porównanie rozwiązania analitycznego z symulacją.}
+    \label{fig:heat_2d_single_source}
+\end{figure}
+Na rysunku widzimy, że podobnie jak w przypadku jednowymiarowym (por. \autoref{fig:heat-1d-single-source}) temperatura ,,rozchodzi się'' stopniowo po całym obszarze.
+Trzecia mapa cieplna w każdym rzędzie przedstawia różnicę między symulacją a rozwiązaniem dokładnym dla każdego punktu.
+
+Dzięki metodzie symulacyjnej możemy otrzymać przybliżone rozwiązania równania (\ref{eq:heat-eq}) nawet dla bardzo skomplikowanych warunków początkowych.
+Przykładowe zastosowanie przedstawia \autoref{fig:heat_2d_smiley}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{heat_2d_smiley.pdf}
+    \caption{Symulacja ewolucji systemu dla bardziej skomplikowanych warunków początkowych.}
+    \label{fig:heat_2d_smiley}
+\end{figure}

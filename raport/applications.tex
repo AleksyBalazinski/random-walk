@@ -1,0 +1,161 @@
+\section{Zastosowania spaceru losowego}
+
+Pomimo prostej definicji bładzenia losowego jest ono jednym z ważniejszych typów łańcuchów Markowa. Jego popularność wynika z faktu, iż wiele zjawisk można opisać jako ciąg losowych zmian zachodzących w czasie. Poniżej omawiamy kilka przykładów zastosowania błądzenia losowego.
+
+\subsection{Problem ruiny gracza}
+
+Jednym z najpopularniejszych zastosowań spaceru losowego jest problem ruiny gracza, w której rozważamy gracza posiadającego początkowy kapitał równy $i$. W każdej rundzie wygrywa on jedną jednostkę z prawdopodobieństwem $p$ lub przegrywa jedną jednostkę z prawdopodobieństwem $q = 1 -p$.
+
+Kapitał gracza po $n$ rozgrywkach można opisać wzorem
+$$
+X_n=i+\sum_{k=1}^{n}\xi_k,
+$$
+gdzie:
+$$
+\xi_k=
+\begin{cases}
+1,& \text{z prawdopodobieństwem } p,\\
+-1,& \text{z prawdopodobieństwem } q.
+\end{cases}
+$$
+Otrzymujemy więc klasyczny spacer losowy na zbiorze liczb całkowitych.
+
+Nasuwa się problem, jak wyznaczyć prawdopodobieństwo bankructwa gracza, innymi słowy osiągnięcia stanu kiedy kapitał gracza jest równy $0$. 
+
+Jeżeli gracz gra sam to prawdopodobieństwo bankructwa wynosi:
+
+$$P_i = 
+\begin{cases} 
+1,& q \geq \frac{1}{2}\\
+\frac{q}{1-q},& q < \frac{1}{2}
+\end{cases}
+$$
+
+Możemy rozszerzyć ten wariant o przeciwnika zaczynającego z kapitałem $N-i$. Który wygrywa jedną jednostką z prawdopodobieństwem $q$ od gracza i traci jedną jednostkę z prawdopodobieństwem $p$. Wtedy prawdopodobieństwo bankructwa gracza wynosi:
+
+
+$$
+P_i=
+\begin{cases}
+\frac{N-i}{N},& p=q=\frac{1}{2}\\
+\frac{(\frac{q}{p})^i -(\frac{q}{p})^N}{1-(\frac{q}{p})^N},& p\neq q.
+\end{cases}
+$$
+
+Model ruiny gracza znajduje zastosowanie w teorii ryzyka, matematyce aktuarialnej oraz analizie wypłacalności przedsiębiorstw i instytucji finansowych.
+
+\subsection{Ruchy zwierząt w środowisku}
+
+Spacer losowy jest również wykorzystywany przy opisywaniu zachowania organizmów w przestrzeni.
+W naturalnym środowisku dane zwierzę porusza się na podstawie wielu informacji(zapach, stromość, wielkość zasobów, bliskość do wody itp.) Jednak zwierzę nie zawsze posiada pełen obraz środowiska i do jego przemieszczania wkrada się losowość, której już nie można opisać deterministycznie. Z pomocą przychodzi spacer losowy, którym w dość łatwy sposób można to opisać.
+
+W podstawowym modelu dyskretnym, położenie organizmu po $n$ krokach, oznaczane jako $X_n$ definiuje się za pomocą równania rekurencyjnego: $$X_n = X_{n-1} + \xi_n$$,
+
+
+W klasycznym wariancie zakłada się, że średnie przesunięcie kwadratowe (MSD) rośnie liniowo z czasem trwania ruchu:
+$[X_n^2]=2dDn$
+
+gdzie $d$ to wymiar rozpatrywanej przestrzeni (np. $d=2$ dla organizmów poruszających się po przestrzeni dwuwymiarowej), a $D$ to współczynnik dyfuzji charakterystyczny dla danego gatunku i środowiska.
+
+\subsubsection*{Rzeczywiste zastosowanie: Strategie żerowania i Loty Lévy'ego}
+
+Loty Lévy'ego (\textit{Lévy flight}) są szczególnym rodzajem spaceru losowego, w którym większość wykonywanych kroków jest krótka, jednak od czasu do czasu pojawiają się bardzo długie skoki.
+
+W klasycznym spacerze losowym lub ruchu Browna długości kolejnych kroków są zwykle podobnej wielkości. W rezultacie trajektoria procesu wygląda zazwyczaj jak ciąg drobnych ruchów wykonywanych wokół punktu początkowego. Natomiast dla lotu Lévy'ego sytuacja wygląda inaczej. Przez długi czas obiekt wykonuje niewielkie ruchy lokalne, po czym może nagle wykonać bardzo duży skok. Następnie ponownie porusza się lokalnie. W rezultacie trajektoria składa się z wielu krótkich odcinków przeplatanych sporadycznymi, lecz bardzo dużymi przemieszczeniami.
+
+
+Długości kroków w lotach Lévy'ego nie pochodzą z rozkładów o grubych ogonach. Oznacza to, że prawdopodobieństwo wystąpienia bardzo dużego kroku maleje znacznie wolniej niż w przypadku rozkładu normalnego.
+
+Typowo zakłada się zależność
+
+\[
+P(U>u)\sim u^{-\alpha},
+\]
+
+gdzie:
+
+\begin{itemize}
+\item $U$ oznacza długość kroku,
+\item $\alpha \in (0, 2)$ jest parametrem rozkładu.
+\end{itemize}
+
+\subsection{Spacer losowy jako narzędzie eksploracji grafu}
+
+Spacer losowy na grafie stanowi naturalne połączenie teorii grafów z teorią procesów stochastycznych, a dokładniej z łańcuchami Markowa.
+Niech $G=(V,E)$ będzie grafem nieskierowanym a $deg(v)=\# \{u \in V:{u,v} \in E\}$. Definiujemy proces stochastyczny $(X_t)_{t\geq 0}$ na zbiorze wierzchołków $V$, taki że:
+\[
+\mathbb{P}(X_{t+1}=v \mid X_t=u)=
+\begin{cases}
+\frac{1}{\deg(u)}, & \{u,v\}\in E,\\[6pt]
+0, & \text{w przeciwnym wypadku}.
+\end{cases}
+\]
+
+Powyższy proces można zapisać jako macierz $P$, gdzie  element $P_{u,v}$ określa prawdopodobieństwo przejścia ze stanu $u$ do $v$. 
+
+\subsubsection{Zmienne losowe czasu}
+\begin{itemize}
+    \item \textbf{Czas pierwszego przejścia} do wierzchołka $v$, oznaczany jako $T_v$, to zmienna losowa zdefiniowana jako:
+    $$ T_v = \min\{t \geq 0 : X_t = v\} $$
+    \item \textbf{Czas pokrycia } dla trajektorii procesu, oznaczany jako $T_{cov}$, to moment, w którym zbiór odwiedzonych wierzchołków staje się równy całemu zbiorowi $V$:
+    $$ T_{cov} = \min\{t \geq 0 : \{X_0, X_1, \dots, X_t\} = V\} $$
+\end{itemize}
+
+\subsubsection{Struktura grafu poprzez własności czasowe procesu}
+
+Poprzez spacer losowy możemy wnioskować o właściwościach danego grafu. Przykładowo:
+\begin{itemize}
+    \item \textbf{Czas dojścia} $H_{u,v}$ - jest to oczekiwana liczba kroków potrzebna aby spacer losowy rozpoczynający w wierzchołku $u$ po raz pierwszy odwiedził wierzchołek $v$:
+    $$H_{u,v}=\mathbb{E}_u[T_v]$$
+    \item \textbf{Oczekiwana wartość pokrycia całego grafu} $C_G$ - jest to maksymalna liczba oczekiwanych kroków potrzeba do odwiedzenia wszystkich wierzchołków grafu startując z "najgorszego" wierzchołka, czyli takiego z którego, najtrudniej odwiedzić wszystkie pozostałe wierzchołki:
+    $$C_G=\max_{u\in V}\mathbb{E}_u[T_{cov}]$$
+\end{itemize}
+
+Dzięki powyższym narzędziom można analizować strukturę grafu za pomocą metod probabilistycznych.
+
+\subsubsection{Rozkład stacjonarny wierzchołków}
+
+Jeżeli graf $G$ jest spójny, nieskierowany, nie jest dwudzielny, spacer losowy tworzy \textbf{ergodyczny łańcuch Markowa}. Stan ten opisuje \textbf{rozkład stacjonarny} $\pi$, spełniający równania równowagi:
+$$\pi(u)P_{u,v}=\pi(v)P_{v,u}$$
+
+zatem:
+$$P_{u,v} = \frac{1}{\deg(u)}$$
+
+Szukamy rozkładu stacjonarnego $\pi$, spełniającego równanie
+$$\pi = \pi P,$$
+co równoważnie oznacza, że dla każdego $v \in V$ zachodzi
+$$\pi(v) = \sum_{u \in V} \pi(u) P_{u,v}$$
+$$\pi(v) = \sum_{u:\{u,v\}\in E} \pi(u)\frac{1}{\deg(u)}$$
+
+Zakładamy, że rozwiązanie ma postać proporcjonalną do stopnia wierzchołka:
+$$\pi(v) = C \cdot \deg(v)$$
+gdzie $C$ jest stałą normalizacyjną.
+
+Podstawiając do równania stacjonarności otrzymujemy
+$$\sum_{u:\{u,v\}\in E} \pi(u)\frac{1}{\deg(u)}=\sum_{u:\{u,v\}\in E} \frac{C\deg(u)}{\deg(u)}$$
+
+Po skróceniu otrzymujemy
+$$\sum_{u:\{u,v\}\in E} C = C \cdot \deg(v)$$
+Zatem warunek stacjonarności jest spełniony.
+
+Korzystając z normalizacji rozkładu:
+$$\sum_{v \in V} \pi(v) = 1$$
+
+Podstawiając $\pi(v)=C\deg(v)$, mamy
+$$\sum_{v \in V} C\deg(v) = 1$$
+$$ C \sum_{v \in V} \deg(v) = 1$$
+
+
+Korzystając z faktu, że w grafie nieskierowanym zachodzi
+$$\sum_{v \in V} \deg(v) = 2|E|$$
+otrzymujemy
+$$ \quad C = \frac{1}{2|E|} $$
+
+W konsekwencji dostajemy końcowy wzór na rozkład stacjonarny:
+$$\pi(v) = \frac{\deg(v)}{2|E|}  \implies \pi(v)\propto \deg(v)$$
+
+Dowodzi to, że wierzchołki o wyższym stopniu są asymptotycznie odwiedzane proporcjonalnie częściej.
+
+\subsubsection{Wnioski}
+
+Poprzez wprowadzenie spaceru losowego do teorii grafów możemy badać wiele różnych problemów związanych z grafami za pomocą metod probabilistycznych, które mogą okazać się w niektórych przypadkach bardziej efektywne niż metody kombinatoryczne lub deterministyczne.

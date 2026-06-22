@@ -1,6 +1,7 @@
 .venv/
 .vscode/
 figures/
+.DS_Store
 raport/*.aux
 raport/*.fdb_latexmk
 raport/*.fls
